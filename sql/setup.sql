@@ -1,8 +1,8 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
+DROP TABLE IF EXISTS joinTable;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS authors;
-DROP TABLE IF EXISTS joinTable;
 
 CREATE TABLE books (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -20,7 +20,9 @@ CREATE TABLE authors (
 CREATE TABLE joinTable (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     author_id INT NOT NULL,
-    book_id INT NOT NULL
+    book_id INT NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES authors(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
 );
 
 INSERT INTO books (
