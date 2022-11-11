@@ -9,12 +9,18 @@ describe('books routes', () => {
     return setup(pool);
   });
   
-  it('should return details of a single book matching the ID', async () => {
+  it('/books/:id should return details of a single book matching the ID', async () => {
     const res = await request(app).get('/books/1');
     expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: expect.any(String),
+      released: expect.any(Number),
+      authors: expect.any(Array)
+    });
   });
 
-  it('should return a list of books', async () => {
+  it('/books should return a list of books', async () => {
     const res = await request(app).get('/books');
     expect(res.status).toBe(200);
     expect(res.body.length).toBeGreaterThan(0);
