@@ -11,6 +11,13 @@ describe('authors routes', () => {
   it('/authors/:id should return details of a single author matching the id', async () => {
     const res = await request(app).get('/authors/1');
     expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      name: expect.any(String),
+      dob: expect.any(String),
+      pob: expect.any(String),
+      books: expect.any(Array)
+    });
   });
 
   it('should return a list of authors', async () => {
